@@ -1,0 +1,38 @@
+import random
+
+words = ["python", "sensor", "robot", "coding", "engine"]
+word = random.choice(words)
+guessed = []
+tries = 6
+
+print("Welcome to hangman")
+print(f"The word has {len(word)} letters")
+
+while tries > 0:
+    display = "".join([l if l in guessed else "_" for l in word])
+    print("Word:", " ".join(display))
+    
+    if "_" not in display:
+        print("You guessed it! The word was:", word)
+        break
+    
+    guess = input("Guess a letter: ").lower()
+    
+    if not guess.isalpha() or len(guess) != 1:
+        print("Invalid input. Enter a single letter.")
+        continue
+    
+    if guess in guessed:
+        print("You already guessed that letter.")
+        continue
+    
+    guessed.append(guess)
+    
+    if guess in word:
+        print("Correct!")
+    else:
+        tries -= 1
+        print(f"Wrong! Tries left: {tries}")
+
+else:
+    print("Out of tries! The word was:", word)
